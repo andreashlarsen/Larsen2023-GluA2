@@ -1,0 +1,54 @@
+ 
+# plumed file based resources:
+# https://www.plumed.org/doc-v2.5/user-doc/html/belfast-6.html
+# https://www.plumed.org/doc-v2.5/user-doc/html/_d_i_s_t_a_n_c_e.html
+
+# uncomment if you want to restart (continue) a previous run
+#RESTART
+
+# define units, default values are: nm, kj/mol, ps
+UNITS LENGTH=nm ENERGY=kj/mol TIME=ns
+
+# set up COM distance reaction coordinate
+# (com distance between NTD of chain B and D)
+# note, I use nomenclature of chains from Zhao2019 (ABDC), 
+# whereas pdb use nomenclature ABCD, so:
+# A = A, B = B, C(pdb) = D (zhao2019), D(pdb) = C (zhao2019)
+
+# define chains and domains
+#NTD_B: GROUP ATOMS=762-1142
+#NTD_D: GROUP ATOMS=1523-1903
+
+# find COM
+#com_B: COM ATOMS=NTD_B
+#com_D: COM ATOMS=NTD_D
+
+# find distance
+#dist:  DISTANCE ATOMS=com_B,com_D
+
+#comA:    COM ATOMS=1-1794
+#comB:    COM ATOMS=1795-3485
+#comD:    COM ATOMS=3486-5152
+#comC:    COM ATOMS=5153-6865
+#comNTDA: COM ATOMS=1-855
+com_NTD_B: COM ATOMS=1795-2649
+com_NTD_D: COM ATOMS=3486-4340
+#comNTDC: COM ATOMS=5153-6007
+dist:    DISTANCE ATOMS=com_NTD_B,com_NTD_D
+
+# Activate metadynamics in dist
+# depositing a Gaussian every 1000 time steps,
+# with height equal to 0.8 kJ/mol,
+# and width 0.1 nm for the collective variable, CV (dist)
+# save bias on grid with min 0 nm and max 20 nm, and default grid spacing: 1/5 of sigma
+
+metad: METAD ARG=dist PACE=1000 HEIGHT=0.8 SIGMA=0.1 GRID_MIN=0 GRID_MAX=18 FILE=HILLS
+
+# make upper wall potential to avoid unphysical breakage of protein
+
+wall: UPPER_WALLS ARG=dist AT=16 KAPPA=10000 
+
+# monitor the CV and the metadynamics bias potential
+# set stride equal to pace so the have the same number of lines (optional)
+PRINT STRIDE=1000 ARG=dist,metad.bias,wall.bias FILE=COLVAR
+
