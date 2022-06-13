@@ -1,0 +1,79 @@
+------------------------------------------------------------------------------------------------------
+folder	protein		lipid	box		His205  	perf	time  		PMF/production
+						protonation*	ns/day	(per window)
+------------------------------------------------------------------------------------------------------
+0	NTD-dimer	none	-d 1.0	  	D1		
+1	NTD-dimer       none    -d 1.0    	NE2		20	100 ns		AT-production
+2	NTD-dimer       none    -d 1.0	  	D1 NE2		20	100 ns		AT-production
+3	NTD-dimer	none	-d 4.0	  	D1		6
+4	NTD-dimer       none    -d 4.0	  	NE2		6       135 ns		AT-production
+5	NTD-dimer       none    -d 4.0	 	D1 NE2		6	135 ns		AT-production
+6	NTD-dimer	none	-box 25 15 15	D1			10 ns 		23
+7       NTD-dimer       none    -box 25 15 15	NE2			10 ns		33
+8	NTD-dimer	none	-box 25 15 15	D1 NE2			10 ns   	12
+9	GluA2-tetramer	POPC    -box 20 20 30   D1 NE2		1200	?		CG-production, dt: 35 fs
+                                                                                        DELETED most files from folder**
+10      NTD-dimer	none	-box 25 15 15	D1			20 ns		
+11	NTD-dimer	none	-box 25 15 15	NE2			20 ns	  		
+12	NTD-dimer	none	-box 25 15 15	D1 NE2			20 ns 		
+13      NTD-dimer	none	-box 25 15 15	D1			40 ns		
+14      NTD-dimer	none	-box 25 15 15	NE2			40 ns		
+15      NTD-dimer	none	-box 25 15 15	D1 NE2			40 ns	
+16      NTD-dimer       none    -box 25 15 15   H205A		?	10 ns			
+16b     NTD-dimer       none    -box 25 15 15   H205A		?	10 ns		25-30, repetition of folder 16	
+17      NTD-dimer       none    -box 25 15 15   H205A(only 1 chain)	10 ns			
+18      GluA2-tetramer  POPC    -box 20 20 30   D1 NE2          900     ?               CG-metaD, dt: 25 fs, height = 1.2
+19      GluA2-tetramer  POPC    -box 22 22 30   D1 NE2          650     2 ns            CG-metaD, dt: 25 fs, upper wall at dist = 16 nm, height = 0.8
+20      GluA2-tetramer  POPC    -box 24 24 30   D1 NE2                  ?               CG-metaD, dt: 25 fs, upper wall at dist = 16 nm, height = 0.8, 
+                                                                                        decrease protein-lipid, or increase proein-water?
+21      GluA2-tetramer  POPC    -box 24 24 30   D1 NE2          600     ?               CG-metaD, dt: 20 fs, upper wall at dist = 16 nm, height = 0.8, martini3beta, lambda 10%
+22      GluA2-tetramer  POPC    -box 24 24 30   D1 NE2          600     ?               CG-metaD, dt: 20 fs, upper wall at dist = 16 nm, height = 0.8, martini3beta
+23      GluA2-tetramer  POPC    -box 24 24 30   D1 NE2          600     ?               CG-metaD, dt: 20 fs, upper wall at dist = 16 nm, height = 0.8, martini3beta, lambda 5%
+24 	GluA2-tetramer  POPC    -box 24 24 30   D1 NE2          600     ?               repeat 2 of folder 22
+25 	GluA2-tetramer  POPC    -box 24 24 30   D1 NE2          600     ?               repeat 3 of folder 22
+26 	GluA2-tetramer  POPC    -box 24 24 30   D1 NE2          600     ?               repeat 4 of folder 22
+27 	GluA2-tetramer  POPC    -box 24 24 30   D1 NE2          600     ?               repeat 5 of folder 22
+28      GluA2-tetramer  ----    -box 24 24 30   ------          ---     -----           AT for EM-fitting
+29 	GluA2-tetramer  POPC    -box 24 24 30   D1 NE2          10,000  ?               repeat 6 of folder 22, but 10 us instead of 600 ns
+30 	GluA2-tetramer  POPC    -box 24 24 30   D1 NE2          10,000  ?               like folder 29, but with chain A+B merged as a chain A and chain C+D merged as chain B. 
+                                                                                        manually merge chains in pdb
+                                                                                        Goal: prevent splitting up of chains.
+                                                                                        Problem: atificial covalent bond is made between C-term of chain A and N-term of chain B 
+                                                                                        (same for chain C and D)
+                                                                                        DELETED most files from folder**
+31 	GluA2-tetramer  POPC    -box 24 24 30   D1 NE2          600     ?               like folder 30, but instead using martinize -merge flag 
+                                                                                        problems with pbc in ntd dist plot (plot_COLVAR) an in visualization when very bulgy
+                                                                                        solution: make box larger
+                                                                                        DELETED most files from folder**
+32 	GluA2-tetramer  POPC    -box 32 32 30   D1 NE2          400     ?               like folder 31, but larger box (xy) and smaller metad force and apply less frequent
+33      emfit 
+34 	GluA2 des, 5vhz POPC    -box 32 32 30   D1 NE2          400     ?               like folder 32, but another PDB (desensitized)
+35 	umbrella				NE2					unprotonated, neutral. like folder 7, but with 5vhz (desensitzed), 5 reps
+36 	umbrella				D1 NE2					protonated, acidic. like folder 8, but with 5vhz (desensitzed), 5 reps
+
+*D1 NE2 states fully protonated (acidic), NE1 is standard protonation (neutral), D1 is alternative protonation (neutral)
+** rm *out *log COLVAR *edr *gro *cpt HILLS *tpr *mdp *xvg *itp *top index.* *pdb *ssd *trr
+comments: 
+- the dimer measures about 11 nm from edge to edge, and the box is, with setting -d 4, about 20 x 20 x 20 nm**3 (19.6 nm per side, as measured by VMD)
+
+status/conclusions:
+- 1 and 2 stayed stable throughout simulation. 1 and 2 deleted to save space...
+- 4 and 5 stayed stable throughout simulation. 4 and 5 deleted to save space...
+- box size ok
+- 10,000 steps nvt equil ok (20 ps), and far more than enough for CG 
+- there is an energy difference for pulling dimers apart at different protonation states
+- H205A mutant had slightly lower  binding energy than WT at neutral pH, but larger binding affinity than WT at acidic pH
+- folder 18: box is a bit too small, in bulgy state
+- folder 18: metaD forces pulls the protein apart, at distances above about 15 nm (after about 900 ns). set max dist at, e.g., 16? decrese bias?
+- folder 19: make box slightly larger. POPC and protein is too sticky (as seen also for C2 domains in CG sims with Martini 2) - decrease lip-prot interaction strength? 
+- do: BME on calculated frames from folder 18
+- martini3 sims have less lipid-stickyness, even with lambda=0%, may be used for reweighting studies
+- martini3 with lambda=10%: dimers disassemble
+- longer simulatioin for umbrella (20 ns) about same result as for shorter simulation windows (10 ns)
+
+on-going: 
+- repeat 4 of folder 7 and 8 
+
+ideas: 
+-run NTD + LBD (+ ligands)
+
