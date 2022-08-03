@@ -12,5 +12,8 @@ MetaD_BME folder contains all scripts for running coarse-grained simulations enh
 Trajectory was reweighted using the Bayesian/Maximum Entropy algorithm (BME) to get better consistency with small-angle neutron scattering (SANS) data.    
 Workflow can be found in MetaD_BME/bash_scripts/Flow.sh, which is the master script that calls the other scripts.     
 
+## Folder: Modeller    
+All files for adding missing residues to PDB 5VHZ (dezensitized GluA2).    
+
 ## Reproducibility and disclaimer
 The scripts will not work "out of the box". Paths must be adjusted, file names and paths updated to the local system (and HPC), and programs installed (e.g. Python and GROMACS with PLUMED - see manuscript). But with some adjustment, the scripts should be sufficient to reproduce the results (disregarding differences due to inherent stochastic processes). 
