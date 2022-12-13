@@ -1,4 +1,4 @@
-# Larsen2022-GluA2
+# Larsen2023-GluA2
 Scripts for paper: Larsen, Perozzo, Biggin, Bowie and Kastrup 2023 (in prep).
 
 ## Folder: PMF
