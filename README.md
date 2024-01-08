@@ -1,5 +1,5 @@
-# Larsen2023-GluA2
-Scripts for paper: Larsen, Perozzo, Biggin, Bowie and Kastrup 2023 (in prep).
+# Larsen2024-GluA2
+Scripts for paper: Larsen, Perozzo, Biggin, Bowie and Kastrup 2024 (in prep).
 
 ## Folder: PMF
 PMF folder contains all scripts for free energy calculations usign potential of mean force (PMF).    
